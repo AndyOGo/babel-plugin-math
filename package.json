@@ -1,0 +1,19 @@
+{
+  "name": "babel-plugin-math",
+  "version": "0.0.1",
+  "description": "Math micro optimizations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndyOGo/babel-plugin-math.git"
+  },
+  "author": "Andreas Deuschlinger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndyOGo/babel-plugin-math/issues"
+  },
+  "homepage": "https://github.com/AndyOGo/babel-plugin-math#readme"
+}
