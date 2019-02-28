@@ -14,20 +14,20 @@ export default function max(babel, path) {
   const isNested = length > 2;
   let lastIntermmediate;
   let lastTernary;
-  let lastResult;
+  let lastResultId;
   const cache = t.variableDeclaration("var", []);
   const { declarations } = cache;
 
   // loop through all arguments
   for (let index = 1; index < length; index++) {
     const isLast = index === length - 1;
-    let result;
+    let resultId;
 
     // if more that two args, result of ternary needs to be cached for later reuse
     if (isNested && !isLast) {
-      result = scope.generateUidIdentifier("mir"); // max-intermediate-result
+      resultId = scope.generateUidIdentifier("mir"); // max-intermediate-result
 
-      declarations.push(t.variableDeclarator(result));
+      declarations.push(t.variableDeclarator(resultId));
     }
 
     const leftIndex = index - 1;
@@ -68,17 +68,17 @@ export default function max(babel, path) {
 
     // cache previous max comparisons for later reuse
     if (isNested && !isLast) {
-      expression = t.assignmentExpression("=", result, ternary);
+      expression = t.assignmentExpression("=", resultId, ternary);
     }
 
     // apply cached result from previous run
     if (lastTernary) {
-      ternary.consequent = lastResult;
+      ternary.consequent = lastResultId;
     }
 
     lastTernary = ternary;
     lastIntermmediate = expression || ternary;
-    lastResult = result;
+    lastResultId = resultId;
   }
 
   const replacement = [lastIntermmediate];
