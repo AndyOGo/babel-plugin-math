@@ -1,14 +1,14 @@
-import maxTransformer from './math/max';
+import maxTransform from './math/max';
 
 export default function babelPluginMath(babel) {
   return {
-    name: "ast-transform", // not required
+    name: 'math', // not required
     visitor: {
-      CallExpression(path, { opts = { max = true } = {} } = {}) {
+      CallExpression(path, { opts: { max = true } = {} } = {}) {
         if (max) {
-          maxTransformer(path, babel)
+          maxTransform(path, babel);
         }
-      }
-    }
+      },
+    },
   };
 }

@@ -1,5 +1,3 @@
-const isSimpleExpression = (node, t) => {
-  t.isLiteral(node) || t.isIdentifier(node);
-};
-
-export default isSimpleExpression;
+export default function isSimpleExpression(node, t) {
+  return t.isLiteral(node) || t.isIdentifier(node);
+}

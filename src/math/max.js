@@ -4,8 +4,8 @@ import isSimpleExpression from '../helpers/isSimpleExpression';
 export default function max(babel, path) {
   const { types: t } = babel;
   const { node, scope } = path;
-  
-  if (!isMathCall(node, "max", t)) {
+
+  if (!isMathCall(node, 'max', t)) {
     return;
   }
 
@@ -15,7 +15,7 @@ export default function max(babel, path) {
   let lastIntermmediate;
   let lastTernary;
   let lastResultId;
-  const cache = t.variableDeclaration("var", []);
+  const cache = t.variableDeclaration('var', []);
   const { declarations } = cache;
 
   // loop through all arguments
@@ -25,7 +25,7 @@ export default function max(babel, path) {
 
     // if more that two args, result of ternary needs to be cached for later reuse
     if (isNested && !isLast) {
-      resultId = scope.generateUidIdentifier("mir"); // max-intermediate-result
+      resultId = scope.generateUidIdentifier('mir'); // max-intermediate-result
 
       declarations.push(t.variableDeclarator(resultId));
     }
@@ -42,7 +42,7 @@ export default function max(babel, path) {
       leftArg = lastIntermmediate;
     } else if (!isLeftSimple) {
       // needs caching if not simple variable or literal
-      const leftId = scope.generateUidIdentifier("mla"); // max-left-arg
+      const leftId = scope.generateUidIdentifier('mla'); // max-left-arg
 
       declarations.push(t.variableDeclarator(leftId, leftArg));
 
@@ -51,7 +51,7 @@ export default function max(babel, path) {
 
     // needs caching if not simple variable or literal
     if (!isRightSimple) {
-      const rightId = scope.generateUidIdentifier("mra"); // max-right-arg
+      const rightId = scope.generateUidIdentifier('mra'); // max-right-arg
 
       declarations.push(t.variableDeclarator(rightId, rightArg));
 
@@ -61,14 +61,14 @@ export default function max(babel, path) {
     // build faster ternary expression
     let expression;
     const ternary = t.conditionalExpression(
-      t.binaryExpression(">", leftArg, rightArg),
+      t.binaryExpression('>', leftArg, rightArg),
       leftArg,
       rightArg
     );
 
     // cache previous max comparisons for later reuse
     if (isNested && !isLast) {
-      expression = t.assignmentExpression("=", resultId, ternary);
+      expression = t.assignmentExpression('=', resultId, ternary);
     }
 
     // apply cached result from previous run
