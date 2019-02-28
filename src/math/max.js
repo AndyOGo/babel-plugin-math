@@ -1,5 +1,8 @@
 import isMathCall from '../helpers/isMathCall';
 import isSimpleExpression from '../helpers/isSimpleExpression';
+import coerceToNumber from '../helpers/coerceToNumber';
+
+const reUidName = /mir|mla|mra/;
 
 export default function max(babel, path) {
   const { types: t } = babel;
@@ -44,7 +47,7 @@ export default function max(babel, path) {
       // needs caching if not simple variable or literal
       const leftId = scope.generateUidIdentifier('mla'); // max-left-arg
 
-      declarations.push(t.variableDeclarator(leftId, leftArg));
+      declarations.push(t.variableDeclarator(leftId, coerceToNumber(leftArg, reUidName, t)));
 
       leftArg = leftId;
     }
@@ -53,10 +56,18 @@ export default function max(babel, path) {
     if (!isRightSimple) {
       const rightId = scope.generateUidIdentifier('mra'); // max-right-arg
 
-      declarations.push(t.variableDeclarator(rightId, rightArg));
+      declarations.push(
+        t.variableDeclarator(rightId, coerceToNumber(rightArg, reUidName, t))
+      );
 
       rightArg = rightId;
     }
+
+    // make sure to have numeric types as the result
+    if (!lastIntermmediate) {
+      leftArg = coerceToNumber(leftArg, reUidName, t);
+    }
+    rightArg = coerceToNumber(rightArg, reUidName, t);
 
     // build faster ternary expression
     let expression;
