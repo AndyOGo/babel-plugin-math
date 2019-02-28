@@ -1,9 +1,7 @@
 import isMathCall from '../helpers/isMathCall';
 import isSimpleExpression from '../helpers/isSimpleExpression';
 
-let hit = 0;
-
-function max(babel, path) {
+export default function max(babel, path) {
   const { types: t } = babel;
   const { node, scope } = path;
   
@@ -11,13 +9,10 @@ function max(babel, path) {
     return;
   }
 
-  hit++;
-
   const { arguments: args } = node;
   const { length } = args;
   const isNested = length > 2;
   let lastIntermmediate;
-  let finalmax;
   let lastTernary;
   let lastResult;
   const cache = t.variableDeclaration("var", []);
@@ -96,5 +91,3 @@ function max(babel, path) {
   // update AST
   path.replaceWithMultiple(replacement);
 }
-
-export default max;
