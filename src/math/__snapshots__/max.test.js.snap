@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`max should transform Math.max calls 1`] = `
+"// literal arguments
++1 > +2 ? +1 : +2;
+
+var _mir;
+
+(_mir = +1 > +2 ? +1 : +2) > +3 ? _mir : +3;
++\\"1\\" > +\\"2\\" ? +\\"1\\" : +\\"2\\";
+
+var _mir2;
+
+(_mir2 = +\\"1\\" > +\\"2\\" ? +\\"1\\" : +\\"2\\") > +\\"3\\" ? _mir2 : +\\"3\\";
++1 > +2 ? +1 : +2;
+
+var _mir3;
+
+(_mir3 = +1 > +2 ? +1 : +2) > +3 ? _mir3 : +3;
++\\"1\\" > +\\"2\\" ? +\\"1\\" : +\\"2\\";
+
+var _mir4;
+
+(_mir4 = +\\"1\\" > +\\"2\\" ? +\\"1\\" : +\\"2\\") > +\\"3\\" ? _mir4 : +\\"3\\";
++a > +b ? +a : +b;
+
+var _mir5;
+
+(_mir5 = +a > +b ? +a : +b) > +c ? _mir5 : +c;
+
+var _mla = +foo(),
+    _mra = +bar();
+
+_mla > _mra ? _mla : _mra;
+
+var _mir6,
+    _mra2 = +(2 + 2),
+    _mir7,
+    _mra3 = +(a * b),
+    _mra4 = +(foo() / bar());
+
+(_mir7 = (_mir6 = +1 > _mra2 ? +1 : _mra2) > _mra3 ? _mir6 : _mra3) > _mra4 ? _mir7 : _mra4;
++a > +b ? +a : +b;
+
+var _mir8;
+
+(_mir8 = +a > +b ? +a : +b) > +c ? _mir8 : +c;
+
+var _mla2 = +foo(),
+    _mra5 = +bar();
+
+_mla2 > _mra5 ? _mla2 : _mra5;
+
+var _mir9,
+    _mra6 = +(2 + 2),
+    _mir10,
+    _mra7 = +(a * b),
+    _mra8 = +(foo() / bar());
+
+(_mir10 = (_mir9 = +1 > _mra6 ? +1 : _mra6) > _mra7 ? _mir9 : _mra7) > _mra8 ? _mir10 : _mra8;"
+`;
