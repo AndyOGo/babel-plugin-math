@@ -25,7 +25,7 @@ export default function max(babel, path) {
 
     // if more that two args, result of ternary needs to be cached for later reuse
     if (isNested && !isLast) {
-      result = scope.generateUidIdentifier("max-intermediate");
+      result = scope.generateUidIdentifier("mir"); // max-intermediate-result
 
       declarations.push(t.variableDeclarator(result));
     }
@@ -42,7 +42,7 @@ export default function max(babel, path) {
       leftArg = lastIntermmediate;
     } else if (!isLeftSimple) {
       // needs caching if not simple variable or literal
-      const leftId = scope.generateUidIdentifier("max-left-arg");
+      const leftId = scope.generateUidIdentifier("mla"); // max-left-arg
 
       declarations.push(t.variableDeclarator(leftId, leftArg));
 
@@ -51,7 +51,7 @@ export default function max(babel, path) {
 
     // needs caching if not simple variable or literal
     if (!isRightSimple) {
-      const rightId = scope.generateUidIdentifier("max-right-arg");
+      const rightId = scope.generateUidIdentifier("mra"); // max-right-arg
 
       declarations.push(t.variableDeclarator(rightId, rightArg));
 
