@@ -4,7 +4,7 @@ export default function babelPluginMath(babel) {
   return {
     name: "ast-transform", // not required
     visitor: {
-      CallExpression(path, { max = true } = {}) {
+      CallExpression(path, { opts = { max = true } = {} } = {}) {
         if (max) {
           maxTransformer(path, babel)
         }
