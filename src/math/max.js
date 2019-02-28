@@ -47,7 +47,9 @@ export default function max(babel, path) {
       // needs caching if not simple variable or literal
       const leftId = scope.generateUidIdentifier('mla'); // max-left-arg
 
-      declarations.push(t.variableDeclarator(leftId, coerceToNumber(leftArg, reUidName, t)));
+      declarations.push(
+        t.variableDeclarator(leftId, coerceToNumber(leftArg, reUidName, t))
+      );
 
       leftArg = leftId;
     }
