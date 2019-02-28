@@ -5,7 +5,7 @@ let hit = 0;
 
 function max(babel, path) {
   const { types: t } = babel;
-  const { node } = path;
+  const { node, scope } = path;
   
   if (!isMathCall(node, "max", t)) {
     return;
@@ -30,7 +30,7 @@ function max(babel, path) {
 
     // if more that two args, result of ternary needs to be cached for later reuse
     if (isNested && !isLast) {
-      result = t.identifier(`__max_${hit}_ResultCache_${index}`);
+      result = scope.generateUidIdentifier("max-intermediate");
 
       declarations.push(t.variableDeclarator(result));
     }
@@ -47,7 +47,7 @@ function max(babel, path) {
       leftArg = lastIntermmediate;
     } else if (!isLeftSimple) {
       // needs caching if not simple variable or literal
-      const leftId = t.identifier(`__max_${hit}_LeftCache_${leftIndex}`);
+      const leftId = scope.generateUidIdentifier("max-left-arg");
 
       declarations.push(t.variableDeclarator(leftId, leftArg));
 
@@ -56,7 +56,7 @@ function max(babel, path) {
 
     // needs caching if not simple variable or literal
     if (!isRightSimple) {
-      const rightId = t.identifier(`__max_${hit}_RightCache_${leftIndex}`);
+      const rightId = scope.generateUidIdentifier("max-right-arg");
 
       declarations.push(t.variableDeclarator(rightId, rightArg));
 
