@@ -6,7 +6,7 @@ export default function babelPluginMath(babel) {
     visitor: {
       CallExpression(path, { opts: { max = true } = {} } = {}) {
         if (max) {
-          maxTransform(path, babel);
+          maxTransform(babel, path);
         }
       },
     },
