@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/AndyOGo/babel-plugin-math/issues"
   },
-  "homepage": "https://github.com/AndyOGo/babel-plugin-math#readme"
+  "homepage": "https://github.com/AndyOGo/babel-plugin-math#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4"
+  }
 }
